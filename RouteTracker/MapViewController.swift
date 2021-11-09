@@ -178,7 +178,7 @@ extension MapViewController {
                 realm.add(points)
             }
         } catch {
-            
+            print(error)
         }
     }
     
