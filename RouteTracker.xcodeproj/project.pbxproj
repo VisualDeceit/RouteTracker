@@ -3,27 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1B0BA3B927383B98005033C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0BA3B827383B98005033C8 /* AppDelegate.swift */; };
 		1B0BA3BB27383B98005033C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0BA3BA27383B98005033C8 /* SceneDelegate.swift */; };
-		1B0BA3BD27383B98005033C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0BA3BC27383B98005033C8 /* ViewController.swift */; };
 		1B0BA3C027383B98005033C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B0BA3BE27383B98005033C8 /* Main.storyboard */; };
 		1B0BA3C227383B9A005033C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B0BA3C127383B9A005033C8 /* Assets.xcassets */; };
 		1B0BA3C527383B9A005033C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B0BA3C327383B9A005033C8 /* LaunchScreen.storyboard */; };
+		1B0BA3D1273840DC005033C8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0BA3D0273840DC005033C8 /* MapViewController.swift */; };
+		535ABC0FBC631A5228968C0D /* Pods_RouteTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA035E9ED14F2E5F74EB230C /* Pods_RouteTracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1B0BA3B527383B98005033C8 /* RouteTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B0BA3B827383B98005033C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B0BA3BA27383B98005033C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1B0BA3BC27383B98005033C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1B0BA3BF27383B98005033C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1B0BA3C127383B9A005033C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B0BA3C427383B9A005033C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B0BA3C627383B9A005033C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B0BA3D0273840DC005033C8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		90D75DEE66C599C8E454F9CA /* Pods-RouteTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.release.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.release.xcconfig"; sourceTree = "<group>"; };
+		EB1803AB0093DF014F0747B4 /* Pods-RouteTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.debug.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		FA035E9ED14F2E5F74EB230C /* Pods_RouteTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouteTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				535ABC0FBC631A5228968C0D /* Pods_RouteTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FAC4A8CFCB9BDC4C67FDB6F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA035E9ED14F2E5F74EB230C /* Pods_RouteTracker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1B0BA3AC27383B98005033C8 = {
 			isa = PBXGroup;
 			children = (
 				1B0BA3B727383B98005033C8 /* RouteTracker */,
 				1B0BA3B627383B98005033C8 /* Products */,
+				34DEEA53641F3538CCEE54B2 /* Pods */,
+				0FAC4A8CFCB9BDC4C67FDB6F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +73,22 @@
 			children = (
 				1B0BA3B827383B98005033C8 /* AppDelegate.swift */,
 				1B0BA3BA27383B98005033C8 /* SceneDelegate.swift */,
-				1B0BA3BC27383B98005033C8 /* ViewController.swift */,
+				1B0BA3D0273840DC005033C8 /* MapViewController.swift */,
 				1B0BA3BE27383B98005033C8 /* Main.storyboard */,
 				1B0BA3C127383B9A005033C8 /* Assets.xcassets */,
 				1B0BA3C327383B9A005033C8 /* LaunchScreen.storyboard */,
 				1B0BA3C627383B9A005033C8 /* Info.plist */,
 			);
 			path = RouteTracker;
+			sourceTree = "<group>";
+		};
+		34DEEA53641F3538CCEE54B2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EB1803AB0093DF014F0747B4 /* Pods-RouteTracker.debug.xcconfig */,
+				90D75DEE66C599C8E454F9CA /* Pods-RouteTracker.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B0BA3C927383B9A005033C8 /* Build configuration list for PBXNativeTarget "RouteTracker" */;
 			buildPhases = (
+				3E00C94B5FC628A1D5742839 /* [CP] Check Pods Manifest.lock */,
 				1B0BA3B127383B98005033C8 /* Sources */,
 				1B0BA3B227383B98005033C8 /* Frameworks */,
 				1B0BA3B327383B98005033C8 /* Resources */,
+				21B9F8994BF24E4E715FB1F7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,14 +158,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		21B9F8994BF24E4E715FB1F7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RouteTracker/Pods-RouteTracker-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RouteTracker/Pods-RouteTracker-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RouteTracker/Pods-RouteTracker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3E00C94B5FC628A1D5742839 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RouteTracker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1B0BA3B127383B98005033C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B0BA3BD27383B98005033C8 /* ViewController.swift in Sources */,
 				1B0BA3B927383B98005033C8 /* AppDelegate.swift in Sources */,
 				1B0BA3BB27383B98005033C8 /* SceneDelegate.swift in Sources */,
+				1B0BA3D1273840DC005033C8 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +351,7 @@
 		};
 		1B0BA3CA27383B9A005033C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB1803AB0093DF014F0747B4 /* Pods-RouteTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +371,7 @@
 		};
 		1B0BA3CB27383B9A005033C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90D75DEE66C599C8E454F9CA /* Pods-RouteTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
