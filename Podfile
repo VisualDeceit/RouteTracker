@@ -6,5 +6,6 @@ target 'RouteTracker' do
   use_frameworks!
 
  pod 'GoogleMaps', '5.2.0'
+ pod 'RealmSwift'
 
 end
