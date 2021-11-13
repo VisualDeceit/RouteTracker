@@ -9,6 +9,6 @@ import Foundation
 import RealmSwift
 
 class Point: Object {
-    @objc dynamic var latitude: Double = 0.0
-    @objc dynamic var longitude: Double = 0.0
+    @Persisted var latitude: Double
+    @Persisted var longitude: Double
 }

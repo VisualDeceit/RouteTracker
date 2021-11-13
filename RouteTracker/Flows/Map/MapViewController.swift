@@ -170,11 +170,9 @@ extension MapViewController {
         guard let path = path else { return }
         
         do {
-            let realm = try Realm()
-            print(String(describing: realm.configuration.fileURL))
+            let realm = try Realm() 
             try realm.write {
                 realm.deleteAll()
-                
                 let points = convertToPoints(from: path)
                 realm.add(points)
             }
