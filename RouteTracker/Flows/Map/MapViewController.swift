@@ -30,7 +30,7 @@ class MapViewController: UIViewController {
         route = GMSPolyline()
         routePath = GMSMutablePath()
         route?.map = mapView
-
+        
         locationManager?.startUpdatingLocation()
         locationManager?.startMonitoringSignificantLocationChanges()
 
@@ -44,7 +44,6 @@ class MapViewController: UIViewController {
         
         locationManager?.stopUpdatingLocation()
         locationManager?.stopMonitoringSignificantLocationChanges()
-
         saveToDB(path: routePath)
     }
     
@@ -117,14 +116,17 @@ class MapViewController: UIViewController {
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let coordinate =  locations.last?.coordinate else { return }
-
-        marker?.position = coordinate
+        guard let newLocation =  locations.last,
+              abs(newLocation.timestamp.timeIntervalSinceNow) < 5,
+              newLocation.horizontalAccuracy > 0
+        else { return }
         
-        routePath?.add(coordinate)
+        marker?.position = newLocation.coordinate
+        routePath?.add(newLocation.coordinate)
         route?.path = routePath
-        mapView.animate (toLocation: coordinate)
-        print(coordinate)
+        mapView.animate (toLocation: newLocation.coordinate)
+        
+        print(newLocation.coordinate)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
