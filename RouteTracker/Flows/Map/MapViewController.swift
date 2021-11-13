@@ -170,9 +170,10 @@ extension MapViewController {
         guard let path = path else { return }
         
         do {
-            let realm = try Realm() 
+            let realm = try Realm()
             try realm.write {
-                realm.deleteAll()
+                let oldPoints = realm.objects(Point.self)
+                realm.delete(oldPoints)
                 let points = convertToPoints(from: path)
                 realm.add(points)
             }
