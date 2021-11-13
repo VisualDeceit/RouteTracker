@@ -29,8 +29,6 @@
 	<string>Using location for route tracking</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Using location for route tracking</string>
-	<key>NSMainNibFile</key>
-	<string>LoginViewController</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -58,6 +56,8 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Auth</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

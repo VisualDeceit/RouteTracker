@@ -10,9 +10,15 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBAction func showMapButtonTapped(_ sender: Any) {
+       performSegue(withIdentifier: "toMap", sender: sender)
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "logout", sender: sender)
+    }
+    
+    override func loadView() {
+        self.view = loadFromNibNamed(nibName: "MainViewController")
     }
 
     override func viewDidLoad() {

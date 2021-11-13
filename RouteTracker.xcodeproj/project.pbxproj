@@ -121,18 +121,10 @@
 			isa = PBXGroup;
 			children = (
 				1B47BFFA273FB64600BD543A /* Main */,
+				1B47C005273FD3F900BD543A /* Map */,
 				1B47BFD1273F8FA000BD543A /* Auth */,
-				1B47BFD0273F8F8B00BD543A /* Map */,
 			);
 			path = Flows;
-			sourceTree = "<group>";
-		};
-		1B47BFD0273F8F8B00BD543A /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				1B0BA3D0273840DC005033C8 /* MapViewController.swift */,
-			);
-			path = Map;
 			sourceTree = "<group>";
 		};
 		1B47BFD1273F8FA000BD543A /* Auth */ = {
@@ -171,6 +163,14 @@
 				1B0BA3BE27383B98005033C8 /* Main.storyboard */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		1B47C005273FD3F900BD543A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				1B0BA3D0273840DC005033C8 /* MapViewController.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		34DEEA53641F3538CCEE54B2 /* Pods */ = {

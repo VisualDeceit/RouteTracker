@@ -21,6 +21,16 @@ class LoginViewController: UIViewController {
         self.view = loadFromNibNamed(nibName: "LoginViewController")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Показав контроллер авторизации, проверяем: если мы авторизованы,
+        // сразу переходим к основному сценарию
+        if UserDefaults.standard.bool(forKey: "isLogin") {
+            performSegue(withIdentifier: "toMain", sender: self)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
@@ -35,10 +45,19 @@ class LoginViewController: UIViewController {
         else {
             return
         }
-        print("Логин")
+        // Сохраним флаг, показывающий, что мы авторизованы
+        UserDefaults.standard.set(true, forKey: "isLogin")
+        // Перейдём к главному сценарию
+        performSegue(withIdentifier: "toMain", sender: sender)
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "toSignUp", sender: sender)
+
+    }
+    
+    @IBAction func logoutButtonTapped(_ segue: UIStoryboardSegue) {
+        UserDefaults.standard.set(false, forKey: "isLogin")
     }
     
     @objc func hideKeyboard() {
