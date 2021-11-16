@@ -18,43 +18,45 @@ class MapViewController: UIViewController {
     var isTracking: Bool = false
     
     @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var startNewTrackButton: UIBarButtonItem!
-    @IBOutlet weak var endTrackButton: UIBarButtonItem!
-    @IBOutlet weak var showPreviousRouteButton: UIBarButtonItem!
+    @IBOutlet weak var recordTrackButton: UIButton!
+    @IBOutlet weak var showRouteButton: UIBarButtonItem!
     
-    @IBAction func startNewTrackButtonTapped(_ sender: UIBarButtonItem) {
-        toggleButtons()
-        isTracking = true
-        
-        route?.map = nil
-        route = GMSPolyline()
-        routePath = GMSMutablePath()
-        route?.map = mapView
+    @IBAction func recordTrackButtonTapped(_ sender: UIButton?) {
+        if !isTracking {
+            route?.map = nil
+            route = GMSPolyline()
+            routePath = GMSMutablePath()
+            route?.map = mapView
+            
+            locationManager?.startUpdatingLocation()
+            locationManager?.startMonitoringSignificantLocationChanges()
 
-        locationManager?.startUpdatingLocation()
-        locationManager?.startMonitoringSignificantLocationChanges()
-
-        let zoomCamera = GMSCameraUpdate.zoom(to: 17)
-        mapView.animate(with: zoomCamera)
+            let zoomCamera = GMSCameraUpdate.zoom(to: 17)
+            mapView.animate(with: zoomCamera)
+            
+            isTracking.toggle()
+            sender?.setImage( UIImage(systemName: "stop.circle"), for: .normal)
+            sender?.tintColor = .black
+        } else {
+            locationManager?.stopUpdatingLocation()
+            locationManager?.stopMonitoringSignificantLocationChanges()
+            saveToDB(path: routePath)
+            
+            isTracking.toggle()
+            sender?.setImage( UIImage(systemName: "record.circle"), for: .normal)
+            sender?.tintColor = .red
+        }
     }
-    
-    @IBAction func endTrackButtonTapped(_ sender: UIBarButtonItem?) {
-        toggleButtons()
-        isTracking = false
-        
-        locationManager?.stopUpdatingLocation()
-        locationManager?.stopMonitoringSignificantLocationChanges()
 
-        saveToDB(path: routePath)
-    }
-    
-    @IBAction func showPreviousRouteButtonTapped(_ sender: UIBarButtonItem?) {
+    @IBAction func showRouteButtonTapped(_ sender: UIBarButtonItem?) {
         guard !isTracking else {
             let alert = UIAlertController(title: "Ошибка", message: "Маршрут не завершен", preferredStyle: .alert)
             let actionCancel = UIAlertAction(title: "Ok", style: .cancel)
             let actionFinish = UIAlertAction(title: "Завершить", style: .default) { [weak self] _ in
-                self?.endTrackButtonTapped(nil)
-                self?.showPreviousRouteButtonTapped(nil)
+                self?.recordTrackButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
+                self?.recordTrackButton.tintColor = .red
+                self?.recordTrackButtonTapped(nil)
+                self?.showRouteButtonTapped(nil)
             }
             alert.addAction(actionCancel)
             alert.addAction(actionFinish)
@@ -85,12 +87,7 @@ class MapViewController: UIViewController {
         configureLocationManager()
         configureMap()
     }
-    
-    private func toggleButtons() {
-        startNewTrackButton.isEnabled.toggle()
-        endTrackButton.isEnabled.toggle()
-    }
-    
+
     func configureMap() {
         let camera = GMSCameraPosition.camera(withLatitude: 0.01, longitude: 0.01, zoom: 17.0)
         mapView.camera = camera
@@ -100,6 +97,7 @@ class MapViewController: UIViewController {
         pinView.tintColor = .red
         marker?.iconView = pinView
         marker?.map = mapView
+        mapView.addSubview(recordTrackButton)
     }
     
     func configureLocationManager() {
@@ -117,14 +115,17 @@ class MapViewController: UIViewController {
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let coordinate =  locations.last?.coordinate else { return }
-
-        marker?.position = coordinate
+        guard let newLocation =  locations.last,
+              abs(newLocation.timestamp.timeIntervalSinceNow) < 5,
+              newLocation.horizontalAccuracy > 0
+        else { return }
         
-        routePath?.add(coordinate)
+        marker?.position = newLocation.coordinate
+        routePath?.add(newLocation.coordinate)
         route?.path = routePath
-        mapView.animate (toLocation: coordinate)
-        print(coordinate)
+        mapView.animate (toLocation: newLocation.coordinate)
+        
+        print(newLocation.coordinate)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -134,7 +135,7 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus == .authorizedAlways ||
             manager.authorizationStatus == .authorizedWhenInUse {
-            startNewTrackButton.isEnabled = true
+            recordTrackButton.isEnabled = true
             // request current location first time
             locationManager?.requestLocation()
         }
@@ -170,10 +171,9 @@ extension MapViewController {
         
         do {
             let realm = try Realm()
-            print(String(describing: realm.configuration.fileURL))
             try realm.write {
-                realm.deleteAll()
-                
+                let oldPoints = realm.objects(Point.self)
+                realm.delete(oldPoints)
                 let points = convertToPoints(from: path)
                 realm.add(points)
             }

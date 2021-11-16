@@ -25,9 +25,9 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Using location for route tracking</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Using location for route tracking</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Using location for route tracking</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
@@ -43,7 +43,7 @@
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
+					<string>Auth</string>
 				</dict>
 			</array>
 		</dict>
@@ -57,7 +57,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>Auth</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

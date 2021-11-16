@@ -14,6 +14,15 @@
 		1B0BA3C527383B9A005033C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B0BA3C327383B9A005033C8 /* LaunchScreen.storyboard */; };
 		1B0BA3D1273840DC005033C8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0BA3D0273840DC005033C8 /* MapViewController.swift */; };
 		1B47BFC3273AE98000BD543A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B47BFC2273AE98000BD543A /* Point.swift */; };
+		1B47BFD9273F907200BD543A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B47BFD7273F907200BD543A /* LoginViewController.swift */; };
+		1B47BFDA273F907200BD543A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B47BFD8273F907200BD543A /* LoginViewController.xib */; };
+		1B47BFDD273F955E00BD543A /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B47BFDC273F955E00BD543A /* Auth.storyboard */; };
+		1B47BFEA273FAF1D00BD543A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B47BFE8273FAF1D00BD543A /* SignUpViewController.swift */; };
+		1B47BFEB273FAF1D00BD543A /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B47BFE9273FAF1D00BD543A /* SignUpViewController.xib */; };
+		1B47BFF6273FB45900BD543A /* UIViewControllel+nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B47BFF5273FB45900BD543A /* UIViewControllel+nib.swift */; };
+		1B47BFFD273FB6B800BD543A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B47BFFB273FB6B800BD543A /* MainViewController.swift */; };
+		1B47BFFE273FB6B800BD543A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B47BFFC273FB6B800BD543A /* MainViewController.xib */; };
+		1B47C008273FDEAA00BD543A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B47C007273FDEAA00BD543A /* User.swift */; };
 		535ABC0FBC631A5228968C0D /* Pods_RouteTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA035E9ED14F2E5F74EB230C /* Pods_RouteTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +36,15 @@
 		1B0BA3C627383B9A005033C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B0BA3D0273840DC005033C8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1B47BFC2273AE98000BD543A /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		1B47BFD7273F907200BD543A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1B47BFD8273F907200BD543A /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		1B47BFDC273F955E00BD543A /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		1B47BFE8273FAF1D00BD543A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		1B47BFE9273FAF1D00BD543A /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		1B47BFF5273FB45900BD543A /* UIViewControllel+nib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControllel+nib.swift"; sourceTree = "<group>"; };
+		1B47BFFB273FB6B800BD543A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		1B47BFFC273FB6B800BD543A /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		1B47C007273FDEAA00BD543A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		90D75DEE66C599C8E454F9CA /* Pods-RouteTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.release.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.release.xcconfig"; sourceTree = "<group>"; };
 		EB1803AB0093DF014F0747B4 /* Pods-RouteTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.debug.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		FA035E9ED14F2E5F74EB230C /* Pods_RouteTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouteTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,10 +91,10 @@
 		1B0BA3B727383B98005033C8 /* RouteTracker */ = {
 			isa = PBXGroup;
 			children = (
+				1B47BFF4273FB43C00BD543A /* Extensions */,
+				1B47BFCF273F8F7D00BD543A /* Flows */,
 				1B47BFC1273AE95500BD543A /* Models */,
 				1B47BFCB273AF5EF00BD543A /* App */,
-				1B0BA3D0273840DC005033C8 /* MapViewController.swift */,
-				1B0BA3BE27383B98005033C8 /* Main.storyboard */,
 				1B0BA3C127383B9A005033C8 /* Assets.xcassets */,
 				1B0BA3C327383B9A005033C8 /* LaunchScreen.storyboard */,
 				1B0BA3C627383B9A005033C8 /* Info.plist */,
@@ -88,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				1B47BFC2273AE98000BD543A /* Point.swift */,
+				1B47C007273FDEAA00BD543A /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -99,6 +118,62 @@
 				1B0BA3BA27383B98005033C8 /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		1B47BFCF273F8F7D00BD543A /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				1B47BFFA273FB64600BD543A /* Main */,
+				1B47C005273FD3F900BD543A /* Map */,
+				1B47BFD1273F8FA000BD543A /* Auth */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		1B47BFD1273F8FA000BD543A /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				1B47BFDC273F955E00BD543A /* Auth.storyboard */,
+				1B47BFD7273F907200BD543A /* LoginViewController.swift */,
+				1B47BFE8273FAF1D00BD543A /* SignUpViewController.swift */,
+				1B47BFF8273FB4B900BD543A /* XIBs */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		1B47BFF4273FB43C00BD543A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1B47BFF5273FB45900BD543A /* UIViewControllel+nib.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1B47BFF8273FB4B900BD543A /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				1B47BFD8273F907200BD543A /* LoginViewController.xib */,
+				1B47BFE9273FAF1D00BD543A /* SignUpViewController.xib */,
+			);
+			name = XIBs;
+			sourceTree = "<group>";
+		};
+		1B47BFFA273FB64600BD543A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1B47BFFB273FB6B800BD543A /* MainViewController.swift */,
+				1B47BFFC273FB6B800BD543A /* MainViewController.xib */,
+				1B0BA3BE27383B98005033C8 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		1B47C005273FD3F900BD543A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				1B0BA3D0273840DC005033C8 /* MapViewController.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		34DEEA53641F3538CCEE54B2 /* Pods */ = {
@@ -170,8 +245,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B47BFDA273F907200BD543A /* LoginViewController.xib in Resources */,
 				1B0BA3C527383B9A005033C8 /* LaunchScreen.storyboard in Resources */,
+				1B47BFDD273F955E00BD543A /* Auth.storyboard in Resources */,
 				1B0BA3C227383B9A005033C8 /* Assets.xcassets in Resources */,
+				1B47BFEB273FAF1D00BD543A /* SignUpViewController.xib in Resources */,
+				1B47BFFE273FB6B800BD543A /* MainViewController.xib in Resources */,
 				1B0BA3C027383B98005033C8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,10 +321,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B47BFF6273FB45900BD543A /* UIViewControllel+nib.swift in Sources */,
+				1B47BFEA273FAF1D00BD543A /* SignUpViewController.swift in Sources */,
 				1B0BA3B927383B98005033C8 /* AppDelegate.swift in Sources */,
 				1B0BA3BB27383B98005033C8 /* SceneDelegate.swift in Sources */,
 				1B0BA3D1273840DC005033C8 /* MapViewController.swift in Sources */,
+				1B47C008273FDEAA00BD543A /* User.swift in Sources */,
+				1B47BFD9273F907200BD543A /* LoginViewController.swift in Sources */,
 				1B47BFC3273AE98000BD543A /* Point.swift in Sources */,
+				1B47BFFD273FB6B800BD543A /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,7 +487,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.50.FominAlexander.RouteTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -423,7 +507,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.50.FominAlexander.RouteTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
