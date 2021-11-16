@@ -15,7 +15,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GMSServices.provideAPIKey("AIzaSyB2wnjFrZFo-30jow3rPhBQG27NftreMoU")
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationDidBecomeBackground),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationDidBecomeActive),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
         return true
+    }
+    
+    @objc func applicationDidBecomeBackground() {
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.tag = -1;
+        
+        if let rootView =  UIApplication.shared.windows.first {
+            rootView.addSubview(blurView)
+            
+            blurView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                blurView.topAnchor.constraint(equalTo: rootView.topAnchor),
+                blurView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor),
+                blurView.heightAnchor.constraint(equalTo: rootView.heightAnchor),
+                blurView.widthAnchor.constraint(equalTo: rootView.widthAnchor)
+            ])
+        }
+    }
+    
+    @objc func applicationDidBecomeActive() {
+        if let rootView =  UIApplication.shared.windows.first,
+           let blurView = rootView.viewWithTag(-1){
+            blurView.removeFromSuperview()
+        }
     }
 
     // MARK: UISceneSession Lifecycle
