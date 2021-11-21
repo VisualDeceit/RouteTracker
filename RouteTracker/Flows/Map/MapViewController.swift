@@ -11,7 +11,7 @@ import RealmSwift
 
 class MapViewController: UIViewController {
     
-    var locationManager: CLLocationManager?
+    let locationManager = LocationManager.shared
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
     var marker: GMSMarker?
@@ -28,8 +28,8 @@ class MapViewController: UIViewController {
             routePath = GMSMutablePath()
             route?.map = mapView
             
-            locationManager?.startUpdatingLocation()
-            locationManager?.startMonitoringSignificantLocationChanges()
+            locationManager.startUpdatingLocation()
+            locationManager.startMonitoringSignificantLocationChanges()
 
             let zoomCamera = GMSCameraUpdate.zoom(to: 17)
             mapView.animate(with: zoomCamera)
@@ -38,8 +38,8 @@ class MapViewController: UIViewController {
             sender?.setImage( UIImage(systemName: "stop.circle"), for: .normal)
             sender?.tintColor = .black
         } else {
-            locationManager?.stopUpdatingLocation()
-            locationManager?.stopMonitoringSignificantLocationChanges()
+            locationManager.stopUpdatingLocation()
+            locationManager.stopMonitoringSignificantLocationChanges()
             saveToDB(path: routePath)
             
             isTracking.toggle()
@@ -101,42 +101,18 @@ class MapViewController: UIViewController {
     }
     
     func configureLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager?.pausesLocationUpdatesAutomatically = false
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.requestAlwaysAuthorization()
-    }
-}
-
-// MARK:- CLLocationManagerDelegate
-
-extension MapViewController: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let newLocation =  locations.last,
-              abs(newLocation.timestamp.timeIntervalSinceNow) < 5,
-              newLocation.horizontalAccuracy > 0
-        else { return }
-        
-        marker?.position = newLocation.coordinate
-        routePath?.add(newLocation.coordinate)
-        route?.path = routePath
-        mapView.animate (toLocation: newLocation.coordinate)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if manager.authorizationStatus == .authorizedAlways ||
-            manager.authorizationStatus == .authorizedWhenInUse {
-            recordTrackButton.isEnabled = true
-            // request current location first time
-            locationManager?.requestLocation()
-        }
+        locationManager
+            .location
+            .asObservable()
+            .bind { [weak self, marker] location in
+                guard let location = location else { return }
+                self?.routePath?.add(location.coordinate)
+                self?.route?.path = self?.routePath
+                let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
+                self?.mapView.animate(to: position)
+                
+                marker?.position = location.coordinate
+            }
     }
 }
 
