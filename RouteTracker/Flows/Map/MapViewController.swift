@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import RealmSwift
+import RxCocoa
 
 class MapViewController: UIViewController {
     
@@ -104,15 +105,15 @@ class MapViewController: UIViewController {
         locationManager
             .location
             .asObservable()
-            .bind { [weak self, marker] location in
+            .bind { [weak self] location in
                 guard let location = location else { return }
                 self?.routePath?.add(location.coordinate)
                 self?.route?.path = self?.routePath
                 let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
                 self?.mapView.animate(to: position)
                 
-                marker?.position = location.coordinate
-            }
+                self?.marker?.position = location.coordinate
+            }.dispose()
     }
 }
 

@@ -68,14 +68,13 @@ class LoginViewController: UIViewController {
         Observable
             .combineLatest(
                 loginView.rx.text,
-                passwordView.rx.text
-            )
+                passwordView.rx.text)
             .map { login, password in
                 return !(login ?? "").isEmpty && (password ?? "").count >= 6
             }
             .bind { [weak loginButton] inputFilled in
                 loginButton?.isEnabled = inputFilled
-            }
+            }.dispose()
     }
 }
 
