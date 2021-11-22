@@ -8,15 +8,17 @@
 import UIKit
 import GoogleMaps
 import RealmSwift
+import RxSwift
 import RxCocoa
 
-class MapViewController: UIViewController {
-    
+final class MapViewController: UIViewController {
     let locationManager = LocationManager.shared
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
     var marker: GMSMarker?
     var isTracking: Bool = false
+    
+    private let bag = DisposeBag()
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var recordTrackButton: UIButton!
@@ -113,7 +115,7 @@ class MapViewController: UIViewController {
                 self?.mapView.animate(to: position)
                 
                 self?.marker?.position = location.coordinate
-            }.dispose()
+            }.disposed(by: bag)
     }
 }
 

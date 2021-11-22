@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class LoginViewController: UIViewController {
+    private let bag = DisposeBag()
     
     @IBOutlet weak var loginView: UITextField!
     @IBOutlet weak var passwordView: UITextField!
@@ -74,7 +75,7 @@ class LoginViewController: UIViewController {
             }
             .bind { [weak loginButton] inputFilled in
                 loginButton?.isEnabled = inputFilled
-            }.dispose()
+            }.disposed(by: bag)
     }
 }
 
