@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                selector: #selector(applicationDidBecomeActive),
                                                name: UIApplication.didBecomeActiveNotification,
                                                object: nil)
+        
+        NotificationService.shared.registerForNotifications()
+        
         return true
     }
     
@@ -43,6 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 blurView.widthAnchor.constraint(equalTo: rootView.widthAnchor)
             ])
         }
+        NotificationService.shared.sendNotification(identifier: "reminder_30_min",
+                                                    time: Date(timeIntervalSinceNow: 60.0 * 1.0),
+                                                    title: "Прошло уже 30 минут",
+                                                    body: "У вас есть незавершенный маршрут")
     }
     
     @objc func applicationDidBecomeActive() {
@@ -50,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            let blurView = rootView.viewWithTag(-1){
             blurView.removeFromSuperview()
         }
+        NotificationService.shared.removeAllNotification()
     }
 
     // MARK: UISceneSession Lifecycle
