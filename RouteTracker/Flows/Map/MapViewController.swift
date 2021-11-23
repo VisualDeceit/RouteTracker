@@ -106,15 +106,20 @@ final class MapViewController: UIViewController {
     func configureLocationManager() {
         locationManager
             .location
-            .asObservable()
-            .bind { [weak self] location in
-                guard let location = location else { return }
-                self?.routePath?.add(location.coordinate)
-                self?.route?.path = self?.routePath
-                let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
-                self?.mapView.animate(to: position)
-                
-                self?.marker?.position = location.coordinate
+            .subscribe { [weak self] (event) in
+                switch event {
+                case .next(let location):
+                    guard let location = location else { return }
+                    
+                    self?.routePath?.add(location.coordinate)
+                    self?.route?.path = self?.routePath
+                    self?.marker?.position = location.coordinate
+                    self?.mapView.animate(toLocation: location.coordinate)
+                case .error(let error):
+                    print(error.localizedDescription)
+                case .completed:
+                    print("completed")
+                }
             }.disposed(by: bag)
     }
 }

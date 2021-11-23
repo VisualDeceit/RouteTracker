@@ -12,8 +12,6 @@ import RxCocoa
 
 final class LocationManager: NSObject{
     static var shared = LocationManager()
-    
-    let disposeBag = DisposeBag()
     let locationManager = CLLocationManager()
     let location: BehaviorRelay<CLLocation?> = BehaviorRelay(value: nil)
     
