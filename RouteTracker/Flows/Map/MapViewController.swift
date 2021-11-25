@@ -90,6 +90,13 @@ final class MapViewController: UIViewController {
         configureLocationManager()
         configureMap()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
+        saveToDB(path: routePath)
+    }
 
     func configureMap() {
         let camera = GMSCameraPosition.camera(withLatitude: 0.01, longitude: 0.01, zoom: 17.0)

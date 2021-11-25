@@ -24,6 +24,7 @@
 		1B47BFFE273FB6B800BD543A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B47BFFC273FB6B800BD543A /* MainViewController.xib */; };
 		1B47C008273FDEAA00BD543A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B47C007273FDEAA00BD543A /* User.swift */; };
 		1B575A6C274AC547006357FB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B575A6B274AC547006357FB /* LocationManager.swift */; };
+		1B575A71274D578B006357FB /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B575A70274D578B006357FB /* NotificationService.swift */; };
 		535ABC0FBC631A5228968C0D /* Pods_RouteTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA035E9ED14F2E5F74EB230C /* Pods_RouteTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		1B47BFFC273FB6B800BD543A /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		1B47C007273FDEAA00BD543A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B575A6B274AC547006357FB /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		1B575A70274D578B006357FB /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		90D75DEE66C599C8E454F9CA /* Pods-RouteTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.release.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.release.xcconfig"; sourceTree = "<group>"; };
 		EB1803AB0093DF014F0747B4 /* Pods-RouteTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.debug.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		FA035E9ED14F2E5F74EB230C /* Pods_RouteTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouteTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				1B575A6B274AC547006357FB /* LocationManager.swift */,
+				1B575A70274D578B006357FB /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B47BFF6273FB45900BD543A /* UIViewController+nib.swift in Sources */,
+				1B575A71274D578B006357FB /* NotificationService.swift in Sources */,
 				1B575A6C274AC547006357FB /* LocationManager.swift in Sources */,
 				1B47BFEA273FAF1D00BD543A /* SignUpViewController.swift in Sources */,
 				1B0BA3B927383B98005033C8 /* AppDelegate.swift in Sources */,
