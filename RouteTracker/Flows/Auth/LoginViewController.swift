@@ -7,16 +7,15 @@
 
 import UIKit
 import RealmSwift
-
-fileprivate enum Constants {
-    static let login = "admin"
-    static let password = "123456"
-}
+import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewController {
+    private let bag = DisposeBag()
     
     @IBOutlet weak var loginView: UITextField!
     @IBOutlet weak var passwordView: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func loadView() {
         self.view = loadFromNibNamed(nibName: "LoginViewController")
@@ -34,6 +33,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(hideKeyboardGesture)
+        configureLoginBindings()
     }
  
     @IBAction func loginButtonTapped(_ sender: Any) {
@@ -63,6 +63,19 @@ class LoginViewController: UIViewController {
     
     @objc func hideKeyboard() {
         self.view.endEditing(true)
+    }
+    
+    func configureLoginBindings() {
+        Observable
+            .combineLatest(
+                loginView.rx.text,
+                passwordView.rx.text)
+            .map { login, password in
+                return !(login ?? "").isEmpty && (password ?? "").count >= 6
+            }
+            .bind { [weak loginButton] inputFilled in
+                loginButton?.isEnabled = inputFilled
+            }.disposed(by: bag)
     }
 }
 

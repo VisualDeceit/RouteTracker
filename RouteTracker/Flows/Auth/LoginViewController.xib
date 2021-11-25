@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="RouteTracker" customModuleProvider="target">
             <connections>
+                <outlet property="loginButton" destination="16A-mb-v6Z" id="EaG-BW-cdu"/>
                 <outlet property="loginView" destination="i8R-HB-P1N" id="RCX-i3-Iq6"/>
                 <outlet property="passwordView" destination="O43-oY-Qb3" id="bB7-EK-s8N"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="p59-t6-EB1"/>

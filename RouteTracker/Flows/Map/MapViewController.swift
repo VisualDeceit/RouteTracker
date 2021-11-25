@@ -8,14 +8,17 @@
 import UIKit
 import GoogleMaps
 import RealmSwift
+import RxSwift
+import RxCocoa
 
-class MapViewController: UIViewController {
-    
-    var locationManager: CLLocationManager?
+final class MapViewController: UIViewController {
+    let locationManager = LocationManager.shared
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
     var marker: GMSMarker?
     var isTracking: Bool = false
+    
+    private let bag = DisposeBag()
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var recordTrackButton: UIButton!
@@ -28,8 +31,8 @@ class MapViewController: UIViewController {
             routePath = GMSMutablePath()
             route?.map = mapView
             
-            locationManager?.startUpdatingLocation()
-            locationManager?.startMonitoringSignificantLocationChanges()
+            locationManager.startUpdatingLocation()
+            locationManager.startMonitoringSignificantLocationChanges()
 
             let zoomCamera = GMSCameraUpdate.zoom(to: 17)
             mapView.animate(with: zoomCamera)
@@ -38,8 +41,8 @@ class MapViewController: UIViewController {
             sender?.setImage( UIImage(systemName: "stop.circle"), for: .normal)
             sender?.tintColor = .black
         } else {
-            locationManager?.stopUpdatingLocation()
-            locationManager?.stopMonitoringSignificantLocationChanges()
+            locationManager.stopUpdatingLocation()
+            locationManager.stopMonitoringSignificantLocationChanges()
             saveToDB(path: routePath)
             
             isTracking.toggle()
@@ -101,42 +104,23 @@ class MapViewController: UIViewController {
     }
     
     func configureLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager?.pausesLocationUpdatesAutomatically = false
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.requestAlwaysAuthorization()
-    }
-}
-
-// MARK:- CLLocationManagerDelegate
-
-extension MapViewController: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let newLocation =  locations.last,
-              abs(newLocation.timestamp.timeIntervalSinceNow) < 5,
-              newLocation.horizontalAccuracy > 0
-        else { return }
-        
-        marker?.position = newLocation.coordinate
-        routePath?.add(newLocation.coordinate)
-        route?.path = routePath
-        mapView.animate (toLocation: newLocation.coordinate)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if manager.authorizationStatus == .authorizedAlways ||
-            manager.authorizationStatus == .authorizedWhenInUse {
-            recordTrackButton.isEnabled = true
-            // request current location first time
-            locationManager?.requestLocation()
-        }
+        locationManager
+            .location
+            .subscribe { [weak self] (event) in
+                switch event {
+                case .next(let location):
+                    guard let location = location else { return }
+                    
+                    self?.routePath?.add(location.coordinate)
+                    self?.route?.path = self?.routePath
+                    self?.marker?.position = location.coordinate
+                    self?.mapView.animate(toLocation: location.coordinate)
+                case .error(let error):
+                    print(error.localizedDescription)
+                case .completed:
+                    print("completed")
+                }
+            }.disposed(by: bag)
     }
 }
 
