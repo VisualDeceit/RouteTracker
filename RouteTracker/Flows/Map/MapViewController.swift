@@ -124,8 +124,6 @@ extension MapViewController: CLLocationManagerDelegate {
         routePath?.add(newLocation.coordinate)
         route?.path = routePath
         mapView.animate (toLocation: newLocation.coordinate)
-        
-        print(newLocation.coordinate)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
