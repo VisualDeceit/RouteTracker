@@ -12,6 +12,7 @@ import RxCocoa
 
 class LoginViewController: UIViewController {
     private let bag = DisposeBag()
+    private var isNeedShowBar = false
     
     @IBOutlet weak var loginView: UITextField!
     @IBOutlet weak var passwordView: UITextField!
@@ -26,6 +27,18 @@ class LoginViewController: UIViewController {
         
         if UserDefaults.standard.bool(forKey: "isLogin") {
             performSegue(withIdentifier: "toMain", sender: self)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isNeedShowBar {
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
     }
     
@@ -59,6 +72,10 @@ class LoginViewController: UIViewController {
     
     @IBAction func logoutButtonTapped(_ segue: UIStoryboardSegue) {
         UserDefaults.standard.set(false, forKey: "isLogin")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        isNeedShowBar = segue.identifier == "toSignUp" ? true : false
     }
     
     @objc func hideKeyboard() {

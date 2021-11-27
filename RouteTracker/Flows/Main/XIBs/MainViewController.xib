@@ -19,17 +19,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HCK-mc-fwJ">
-                    <rect key="frame" x="151.5" y="419" width="111" height="68"/>
+                    <rect key="frame" x="149" y="400" width="116" height="106"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tg2-Gy-HLf">
-                            <rect key="frame" x="0.0" y="0.0" width="111" height="30"/>
+                            <rect key="frame" x="0.0" y="0.0" width="116" height="30"/>
                             <state key="normal" title="Показать карту"/>
                             <connections>
                                 <action selector="showMapButtonTapped:" destination="-1" eventType="touchUpInside" id="zac-Ds-raw"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgw-ZC-B8O">
+                            <rect key="frame" x="0.0" y="38" width="116" height="30"/>
+                            <state key="normal" title="Сменить аватар"/>
+                            <connections>
+                                <action selector="showMapButtonTapped:" destination="-1" eventType="touchUpInside" id="Pxb-e0-wMk"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Htu-Nk-l1K">
-                            <rect key="frame" x="0.0" y="38" width="111" height="30"/>
+                            <rect key="frame" x="0.0" y="76" width="116" height="30"/>
                             <state key="normal" title="Выйти"/>
                             <connections>
                                 <action selector="logoutButtonTapped:" destination="-1" eventType="touchUpInside" id="KZL-nT-i46"/>
@@ -37,17 +44,33 @@
                         </button>
                     </subviews>
                 </stackView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ava_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="bVk-AG-YAV">
+                    <rect key="frame" x="312" y="52" width="94" height="94"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="94" id="CQM-pN-Me6"/>
+                        <constraint firstAttribute="height" constant="94" id="WaF-Jh-NPw"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="bVk-AG-YAV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="J6Y-O0-hj2"/>
                 <constraint firstItem="HCK-mc-fwJ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="SrP-C9-rJ1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bVk-AG-YAV" secondAttribute="trailing" constant="8" id="dqR-BT-9HQ"/>
                 <constraint firstItem="HCK-mc-fwJ" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="t6U-6N-Emf"/>
             </constraints>
-            <point key="canvasLocation" x="14" y="101"/>
+            <point key="canvasLocation" x="13.043478260869566" y="100.44642857142857"/>
         </view>
     </objects>
     <resources>
+        <image name="ava_placeholder" width="612" height="612"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
