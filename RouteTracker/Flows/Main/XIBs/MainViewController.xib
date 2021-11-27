@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="RouteTracker" customModuleProvider="target">
             <connections>
+                <outlet property="avatarImageView" destination="bVk-AG-YAV" id="jyk-6m-2Nj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,7 +33,7 @@
                             <rect key="frame" x="0.0" y="38" width="116" height="30"/>
                             <state key="normal" title="Сменить аватар"/>
                             <connections>
-                                <action selector="showMapButtonTapped:" destination="-1" eventType="touchUpInside" id="Pxb-e0-wMk"/>
+                                <action selector="changeAvatarButtonTapped:" destination="-1" eventType="touchUpInside" id="O2A-Yn-yOK"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Htu-Nk-l1K">
@@ -44,7 +45,7 @@
                         </button>
                     </subviews>
                 </stackView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ava_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="bVk-AG-YAV">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bVk-AG-YAV">
                     <rect key="frame" x="312" y="52" width="94" height="94"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="94" id="CQM-pN-Me6"/>
@@ -53,7 +54,7 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="20"/>
+                            <integer key="value" value="47"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </imageView>
@@ -70,7 +71,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ava_placeholder" width="612" height="612"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -17,6 +17,7 @@ final class MapViewController: UIViewController {
     var routePath: GMSMutablePath?
     var marker: GMSMarker?
     var isTracking: Bool = false
+    var avatarImage: UIImage!
     
     private let bag = DisposeBag()
     
@@ -103,7 +104,10 @@ final class MapViewController: UIViewController {
         mapView.camera = camera
         
         marker = GMSMarker()
-        let pinView = UIImageView(image: UIImage(systemName: "mappin"))
+        let pinView = UIImageView(image: avatarImage)
+        pinView.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        pinView.layer.cornerRadius = 16
+        pinView.layer.masksToBounds = true
         pinView.tintColor = .red
         marker?.iconView = pinView
         marker?.map = mapView
