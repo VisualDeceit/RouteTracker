@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LeV-zf-Pzb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,35 +18,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlu-SX-nx1" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9n-DW-Iu5">
-                                        <rect key="frame" x="8" y="690" width="60" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="k8Z-D5-p9C"/>
-                                            <constraint firstAttribute="height" constant="60" id="odJ-pM-HXy"/>
-                                        </constraints>
-                                        <color key="tintColor" systemColor="systemRedColor"/>
-                                        <state key="normal" image="record.circle" catalog="system"/>
-                                        <connections>
-                                            <action selector="recordTrackButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Fc-41-O61"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                                <rect key="frame" x="0.0" y="88" width="453" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFg-5U-hhA" customClass="RecordButton" customModule="RouteTracker" customModuleProvider="target">
+                                <rect key="frame" x="175" y="790" width="64" height="64"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="c9n-DW-Iu5" firstAttribute="leading" secondItem="wlu-SX-nx1" secondAttribute="leading" constant="8" id="1jP-6o-eER"/>
-                                    <constraint firstAttribute="bottom" secondItem="c9n-DW-Iu5" secondAttribute="bottom" constant="24" id="PaS-8u-GOl"/>
+                                    <constraint firstAttribute="height" constant="64" id="AlI-bH-rov"/>
+                                    <constraint firstAttribute="width" constant="64" id="IkQ-eu-0rK"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wlu-SX-nx1" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="FYr-1U-CWM"/>
-                            <constraint firstItem="wlu-SX-nx1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Fgn-uI-JgA"/>
-                            <constraint firstItem="wlu-SX-nx1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MV9-Sn-VrI"/>
-                            <constraint firstItem="wlu-SX-nx1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Owq-4o-GDw"/>
+                            <constraint firstItem="wlu-SX-nx1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7eB-Zt-82w"/>
+                            <constraint firstItem="wlu-SX-nx1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="39" id="DaA-yN-juG"/>
+                            <constraint firstItem="wlu-SX-nx1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="RCX-Px-Azl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wlu-SX-nx1" secondAttribute="bottom" id="dv3-hF-nmi"/>
+                            <constraint firstItem="tFg-5U-hhA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pDq-37-WOg"/>
+                            <constraint firstItem="tFg-5U-hhA" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-8" id="yo7-ub-PkD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="02U-D8-i19">
@@ -57,13 +50,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="wlu-SX-nx1" id="uQ5-mn-1gi"/>
-                        <outlet property="recordTrackButton" destination="c9n-DW-Iu5" id="jIw-bU-E7A"/>
+                        <outlet property="recordTrackButton" destination="tFg-5U-hhA" id="PiV-yO-zll"/>
                         <outlet property="showRouteButton" destination="eWk-x4-i89" id="ujP-zb-6hE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="770" y="76"/>
+            <point key="canvasLocation" x="769.56521739130437" y="75.669642857142847"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="qLd-M4-scT">
@@ -107,12 +100,8 @@
     </scenes>
     <resources>
         <image name="map.fill" catalog="system" width="128" height="110"/>
-        <image name="record.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
