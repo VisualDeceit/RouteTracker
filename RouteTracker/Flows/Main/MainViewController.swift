@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController {
     private var isNeedShowBar = false
@@ -59,8 +60,13 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        avatarImage = UIImage(named: "ava_placeholder")
-        avatarImageView.image = avatarImage
+        if let image = loadAvatarFromDB() {
+            avatarImage = image
+            avatarImageView.image = avatarImage
+        } else {
+            avatarImage = UIImage(named: "ava_placeholder")
+            avatarImageView.image = avatarImage
+        }
     }
 }
 
@@ -73,6 +79,7 @@ extension MainViewController: UINavigationControllerDelegate & UIImagePickerCont
         if let newAvatar = extractImage(from: info) {
             avatarImage = newAvatar
             avatarImageView.image = avatarImage
+            saveAvatarToDB(image: newAvatar)
         }
         picker.dismiss(animated: true)
     }
@@ -84,6 +91,36 @@ extension MainViewController: UINavigationControllerDelegate & UIImagePickerCont
             return image
         } else {
             return nil
+        }
+    }
+}
+
+// MARK: - Realm
+extension MainViewController {
+    func loadAvatarFromDB() -> UIImage? {
+        do {
+            let realm = try Realm()
+            let login = UserDefaults.standard.string(forKey: "user")
+            let user = realm.object(ofType: User.self, forPrimaryKey: login)
+            guard let imageData = user?.avatar else { return nil }
+            return UIImage(data: imageData)
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    func saveAvatarToDB(image: UIImage) {
+        do {
+            let realm = try Realm()
+            let login = UserDefaults.standard.string(forKey: "user")
+            if let user = realm.object(ofType: User.self, forPrimaryKey: login) {
+                try realm.write {
+                    user.avatar = image.pngData()!
+                }
+            }
+        } catch {
+            print(error)
         }
     }
 }

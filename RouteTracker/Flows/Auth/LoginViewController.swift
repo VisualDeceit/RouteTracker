@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UserDefaults.standard.bool(forKey: "isLogin") {
+        if UserDefaults.standard.string(forKey: "user") != nil {
             performSegue(withIdentifier: "toMain", sender: self)
         }
     }
@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
             return
         }
 
-        UserDefaults.standard.set(true, forKey: "isLogin")
+        UserDefaults.standard.set(login, forKey: "user")
         performSegue(withIdentifier: "toMain", sender: sender)
     }
     
@@ -71,7 +71,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func logoutButtonTapped(_ segue: UIStoryboardSegue) {
-        UserDefaults.standard.set(false, forKey: "isLogin")
+        UserDefaults.standard.removeObject(forKey: "user")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
