@@ -139,22 +139,20 @@ extension MapViewController {
     }
     
     func saveToDB(path: GMSMutablePath?) {
-        guard let path = path else { return }
-        
         do {
             let realm = try Realm()
-
-            let login = UserDefaults.standard.string(forKey: "user")
-            let user = realm.object(ofType: User.self, forPrimaryKey: login)
-            let oldRoute = user!.route
-            
+            guard let path = path,
+                  let login = UserDefaults.standard.string(forKey: "user"),
+                  let user = realm.object(ofType: User.self, forPrimaryKey: login) else {
+                return
+            }
+            let oldRoute = user.route
             try realm.write {
                 realm.delete(oldRoute)
-                
                 let newRoute = convertToPoints(from: path)
-                user?.route.append(objectsIn: newRoute)
+                user.route.append(objectsIn: newRoute)
             }
-        } catch {
+        } catch let error as NSError {
             print(error)
         }
     }
@@ -162,16 +160,15 @@ extension MapViewController {
     func loadFromDB() -> GMSMutablePath? {
         do {
             let realm = try Realm()
-            
-            let login = UserDefaults.standard.string(forKey: "user")
-            let user = realm.object(ofType: User.self, forPrimaryKey: login)
-            
-            let points = Array(user!.route)
+            guard let login = UserDefaults.standard.string(forKey: "user"),
+                  let user = realm.object(ofType: User.self, forPrimaryKey: login) else {
+                return nil
+            }
+            let points = Array(user.route)
             if points.count == 0  { return nil }
-            
             let path = convertToPath(from: points)
             return path
-        } catch {
+        } catch let error as NSError {
             print(error)
             return nil
         }

@@ -97,17 +97,31 @@
 		1B0BA3B727383B98005033C8 /* RouteTracker */ = {
 			isa = PBXGroup;
 			children = (
-				1B8E9916275357F000C00D70 /* CustomUI */,
-				1B575A6A274AC52B006357FB /* Services */,
-				1B47BFF4273FB43C00BD543A /* Extensions */,
+				1B1210F92754978D00B3C42E /* Core */,
 				1B47BFCF273F8F7D00BD543A /* Flows */,
-				1B47BFC1273AE95500BD543A /* Models */,
 				1B47BFCB273AF5EF00BD543A /* App */,
-				1B0BA3C127383B9A005033C8 /* Assets.xcassets */,
-				1B0BA3C327383B9A005033C8 /* LaunchScreen.storyboard */,
-				1B0BA3C627383B9A005033C8 /* Info.plist */,
+				1B1210FA275497E000B3C42E /*  Resources */,
 			);
 			path = RouteTracker;
+			sourceTree = "<group>";
+		};
+		1B1210F92754978D00B3C42E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1B47BFC1273AE95500BD543A /* Models */,
+				1B47BFF4273FB43C00BD543A /* Extensions */,
+				1B575A6A274AC52B006357FB /* Services */,
+				1B8E9916275357F000C00D70 /* CustomUI */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		1B1210FA275497E000B3C42E /*  Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1B0BA3C127383B9A005033C8 /* Assets.xcassets */,
+			);
+			path = " Resources";
 			sourceTree = "<group>";
 		};
 		1B47BFC1273AE95500BD543A /* Models */ = {
@@ -122,6 +136,8 @@
 		1B47BFCB273AF5EF00BD543A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				1B0BA3C327383B9A005033C8 /* LaunchScreen.storyboard */,
+				1B0BA3C627383B9A005033C8 /* Info.plist */,
 				1B0BA3B827383B98005033C8 /* AppDelegate.swift */,
 				1B0BA3BA27383B98005033C8 /* SceneDelegate.swift */,
 			);
@@ -515,7 +531,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQ48S8SUS4;
-				INFOPLIST_FILE = RouteTracker/Info.plist;
+				INFOPLIST_FILE = RouteTracker/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -535,7 +551,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQ48S8SUS4;
-				INFOPLIST_FILE = RouteTracker/Info.plist;
+				INFOPLIST_FILE = RouteTracker/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

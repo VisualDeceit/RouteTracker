@@ -97,14 +97,16 @@ extension MainViewController: UINavigationControllerDelegate & UIImagePickerCont
 
 // MARK: - Realm
 extension MainViewController {
+    
     func loadAvatarFromDB() -> UIImage? {
         do {
             let realm = try Realm()
-            let login = UserDefaults.standard.string(forKey: "user")
-            let user = realm.object(ofType: User.self, forPrimaryKey: login)
-            guard let imageData = user?.avatar else { return nil }
-            return UIImage(data: imageData)
-        } catch {
+            guard let login = UserDefaults.standard.string(forKey: "user"),
+                  let user = realm.object(ofType: User.self, forPrimaryKey: login) else {
+                return nil
+            }
+            return UIImage(data: user.avatar)
+        } catch let error as NSError {
             print(error)
             return nil
         }
@@ -113,13 +115,15 @@ extension MainViewController {
     func saveAvatarToDB(image: UIImage) {
         do {
             let realm = try Realm()
-            let login = UserDefaults.standard.string(forKey: "user")
-            if let user = realm.object(ofType: User.self, forPrimaryKey: login) {
-                try realm.write {
-                    user.avatar = image.pngData()!
-                }
+            guard let login = UserDefaults.standard.string(forKey: "user"),
+                  let user = realm.object(ofType: User.self, forPrimaryKey: login),
+                  let imageData = image.pngData() else {
+                return
             }
-        } catch {
+            try realm.write {
+                user.avatar = imageData
+            }
+        } catch let error as NSError {
             print(error)
         }
     }
