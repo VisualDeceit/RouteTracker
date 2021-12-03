@@ -16,51 +16,30 @@ final class MapViewController: UIViewController {
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
     var marker: GMSMarker?
-    var isTracking: Bool = false
+    var isRecording: Bool = false
+    var avatarImage: UIImage!
     
     private let bag = DisposeBag()
     
     @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var recordTrackButton: UIButton!
+    @IBOutlet weak var recordTrackButton: RecordButton!
     @IBOutlet weak var showRouteButton: UIBarButtonItem!
     
-    @IBAction func recordTrackButtonTapped(_ sender: UIButton?) {
-        if !isTracking {
-            route?.map = nil
-            route = GMSPolyline()
-            routePath = GMSMutablePath()
-            route?.map = mapView
-            
-            locationManager.startUpdatingLocation()
-            locationManager.startMonitoringSignificantLocationChanges()
-
-            let zoomCamera = GMSCameraUpdate.zoom(to: 17)
-            mapView.animate(with: zoomCamera)
-            
-            isTracking.toggle()
-            sender?.setImage( UIImage(systemName: "stop.circle"), for: .normal)
-            sender?.tintColor = .black
-        } else {
-            locationManager.stopUpdatingLocation()
-            locationManager.stopMonitoringSignificantLocationChanges()
-            saveToDB(path: routePath)
-            
-            isTracking.toggle()
-            sender?.setImage( UIImage(systemName: "record.circle"), for: .normal)
-            sender?.tintColor = .red
-        }
-    }
-
     @IBAction func showRouteButtonTapped(_ sender: UIBarButtonItem?) {
-        guard !isTracking else {
-            let alert = UIAlertController(title: "Ошибка", message: "Маршрут не завершен", preferredStyle: .alert)
+        guard !isRecording else {
+            let alert = UIAlertController(title: "Внимание", message: "Маршрут не завершен", preferredStyle: .alert)
             let actionCancel = UIAlertAction(title: "Ok", style: .cancel)
             let actionFinish = UIAlertAction(title: "Завершить", style: .default) { [weak self] _ in
-                self?.recordTrackButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
-                self?.recordTrackButton.tintColor = .red
-                self?.recordTrackButtonTapped(nil)
+                self?.recordTrackButton.endRecording()
+                
+                self?.locationManager.stopUpdatingLocation()
+                self?.locationManager.stopMonitoringSignificantLocationChanges()
+                self?.saveToDB(path: self?.routePath)
+                self?.isRecording.toggle()
+     
                 self?.showRouteButtonTapped(nil)
             }
+            
             alert.addAction(actionCancel)
             alert.addAction(actionFinish)
             present(alert, animated: true)
@@ -81,14 +60,17 @@ final class MapViewController: UIViewController {
         route?.map = mapView
         route?.path = routePath
         let bounds = GMSCoordinateBounds(path: routePath)
-        let update = GMSCameraUpdate.fit(bounds, withPadding: 10.0)
+        let update = GMSCameraUpdate.fit(bounds, withPadding: 40.0)
         mapView.moveCamera(update)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureLocationManager()
         configureMap()
+        
+        recordTrackButton.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,11 +85,13 @@ final class MapViewController: UIViewController {
         mapView.camera = camera
         
         marker = GMSMarker()
-        let pinView = UIImageView(image: UIImage(systemName: "mappin"))
+        let pinView = UIImageView(image: avatarImage)
+        pinView.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        pinView.layer.cornerRadius = 16
+        pinView.layer.masksToBounds = true
         pinView.tintColor = .red
         marker?.iconView = pinView
         marker?.map = mapView
-        mapView.addSubview(recordTrackButton)
     }
     
     func configureLocationManager() {
@@ -132,7 +116,6 @@ final class MapViewController: UIViewController {
 }
 
 // MARK: - Realm
-
 extension MapViewController {
     
     func convertToPoints(from path: GMSMutablePath) -> [Point] {
@@ -156,17 +139,20 @@ extension MapViewController {
     }
     
     func saveToDB(path: GMSMutablePath?) {
-        guard let path = path else { return }
-        
         do {
             let realm = try Realm()
-            try realm.write {
-                let oldPoints = realm.objects(Point.self)
-                realm.delete(oldPoints)
-                let points = convertToPoints(from: path)
-                realm.add(points)
+            guard let path = path,
+                  let login = UserDefaults.standard.string(forKey: "user"),
+                  let user = realm.object(ofType: User.self, forPrimaryKey: login) else {
+                return
             }
-        } catch {
+            let oldRoute = user.route
+            try realm.write {
+                realm.delete(oldRoute)
+                let newRoute = convertToPoints(from: path)
+                user.route.append(objectsIn: newRoute)
+            }
+        } catch let error as NSError {
             print(error)
         }
     }
@@ -174,14 +160,43 @@ extension MapViewController {
     func loadFromDB() -> GMSMutablePath? {
         do {
             let realm = try Realm()
-            let points = Array(realm.objects(Point.self))
+            guard let login = UserDefaults.standard.string(forKey: "user"),
+                  let user = realm.object(ofType: User.self, forPrimaryKey: login) else {
+                return nil
+            }
+            let points = Array(user.route)
             if points.count == 0  { return nil }
             let path = convertToPath(from: points)
             return path
-        } catch {
+        } catch let error as NSError {
             print(error)
             return nil
         }
+    }
+}
+
+// MARK: - Record
+extension MapViewController: RecordButtonDelegate {
+    
+    func tapButton(isRecording: Bool) {
+        if isRecording {
+            route?.map = nil
+            route = GMSPolyline()
+            routePath = GMSMutablePath()
+            route?.map = mapView
+            
+            locationManager.startUpdatingLocation()
+            locationManager.startMonitoringSignificantLocationChanges()
+            
+            let zoomCamera = GMSCameraUpdate.zoom(to: 17)
+            mapView.animate(with: zoomCamera)
+        } else {
+            locationManager.stopUpdatingLocation()
+            locationManager.stopMonitoringSignificantLocationChanges()
+            
+            saveToDB(path: routePath)
+        }
+        self.isRecording = isRecording
     }
 }
 

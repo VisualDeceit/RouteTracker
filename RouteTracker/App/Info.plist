@@ -29,6 +29,8 @@
 	<string>Using location for route tracking</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Using location for route tracking</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Using to make avatar for map marker </string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

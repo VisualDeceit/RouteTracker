@@ -25,6 +25,7 @@
 		1B47C008273FDEAA00BD543A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B47C007273FDEAA00BD543A /* User.swift */; };
 		1B575A6C274AC547006357FB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B575A6B274AC547006357FB /* LocationManager.swift */; };
 		1B575A71274D578B006357FB /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B575A70274D578B006357FB /* NotificationService.swift */; };
+		1B8E9918275358DC00C00D70 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8E9917275358DC00C00D70 /* RecordButton.swift */; };
 		535ABC0FBC631A5228968C0D /* Pods_RouteTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA035E9ED14F2E5F74EB230C /* Pods_RouteTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		1B47C007273FDEAA00BD543A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B575A6B274AC547006357FB /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		1B575A70274D578B006357FB /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		1B8E9917275358DC00C00D70 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		90D75DEE66C599C8E454F9CA /* Pods-RouteTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.release.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.release.xcconfig"; sourceTree = "<group>"; };
 		EB1803AB0093DF014F0747B4 /* Pods-RouteTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.debug.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		FA035E9ED14F2E5F74EB230C /* Pods_RouteTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouteTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,16 +97,31 @@
 		1B0BA3B727383B98005033C8 /* RouteTracker */ = {
 			isa = PBXGroup;
 			children = (
-				1B575A6A274AC52B006357FB /* Services */,
-				1B47BFF4273FB43C00BD543A /* Extensions */,
+				1B1210F92754978D00B3C42E /* Core */,
 				1B47BFCF273F8F7D00BD543A /* Flows */,
-				1B47BFC1273AE95500BD543A /* Models */,
 				1B47BFCB273AF5EF00BD543A /* App */,
-				1B0BA3C127383B9A005033C8 /* Assets.xcassets */,
-				1B0BA3C327383B9A005033C8 /* LaunchScreen.storyboard */,
-				1B0BA3C627383B9A005033C8 /* Info.plist */,
+				1B1210FA275497E000B3C42E /*  Resources */,
 			);
 			path = RouteTracker;
+			sourceTree = "<group>";
+		};
+		1B1210F92754978D00B3C42E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1B47BFC1273AE95500BD543A /* Models */,
+				1B47BFF4273FB43C00BD543A /* Extensions */,
+				1B575A6A274AC52B006357FB /* Services */,
+				1B8E9916275357F000C00D70 /* CustomUI */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		1B1210FA275497E000B3C42E /*  Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1B0BA3C127383B9A005033C8 /* Assets.xcassets */,
+			);
+			path = " Resources";
 			sourceTree = "<group>";
 		};
 		1B47BFC1273AE95500BD543A /* Models */ = {
@@ -119,6 +136,8 @@
 		1B47BFCB273AF5EF00BD543A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				1B0BA3C327383B9A005033C8 /* LaunchScreen.storyboard */,
+				1B0BA3C627383B9A005033C8 /* Info.plist */,
 				1B0BA3B827383B98005033C8 /* AppDelegate.swift */,
 				1B0BA3BA27383B98005033C8 /* SceneDelegate.swift */,
 			);
@@ -196,6 +215,14 @@
 				1B575A70274D578B006357FB /* NotificationService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		1B8E9916275357F000C00D70 /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				1B8E9917275358DC00C00D70 /* RecordButton.swift */,
+			);
+			path = CustomUI;
 			sourceTree = "<group>";
 		};
 		34DEEA53641F3538CCEE54B2 /* Pods */ = {
@@ -351,6 +378,7 @@
 				1B0BA3BB27383B98005033C8 /* SceneDelegate.swift in Sources */,
 				1B0BA3D1273840DC005033C8 /* MapViewController.swift in Sources */,
 				1B47C008273FDEAA00BD543A /* User.swift in Sources */,
+				1B8E9918275358DC00C00D70 /* RecordButton.swift in Sources */,
 				1B47BFD9273F907200BD543A /* LoginViewController.swift in Sources */,
 				1B47BFC3273AE98000BD543A /* Point.swift in Sources */,
 				1B47BFFD273FB6B800BD543A /* MainViewController.swift in Sources */,
@@ -430,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -485,7 +513,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -503,7 +531,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQ48S8SUS4;
-				INFOPLIST_FILE = RouteTracker/Info.plist;
+				INFOPLIST_FILE = RouteTracker/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -523,7 +551,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQ48S8SUS4;
-				INFOPLIST_FILE = RouteTracker/Info.plist;
+				INFOPLIST_FILE = RouteTracker/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
